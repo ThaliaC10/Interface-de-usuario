@@ -1,0 +1,67 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+# Função para adicionar curso
+def adicionar():
+    curso = combo.get()
+
+    if curso == "":
+        messagebox.showwarning("Aviso", "Selecione um curso!")
+    else:
+        lista.insert(tk.END, curso)
+
+# Função para remover curso
+def remover():
+    try:
+        indice = lista.curselection()[0]
+        lista.delete(indice)
+    except:
+        messagebox.showwarning("Aviso", "Selecione um curso da lista!")
+
+# Janela principal
+janela = tk.Tk()
+janela.title("Cadastro de Cursos")
+janela.geometry("400x350")
+janela.resizable(False, False)
+
+# Título
+titulo = tk.Label(janela, text="Sistema de Cadastro de Cursos",
+                  font=("Arial", 14, "bold"))
+titulo.pack(pady=10)
+
+# Label
+lbl = tk.Label(janela, text="Escolha um curso:")
+lbl.pack()
+
+# Combobox
+combo = ttk.Combobox(janela, width=30)
+combo["values"] = (
+    "Python",
+    "Java",
+    "C++",
+    "JavaScript",
+    "Flutter",
+    "Banco de Dados",
+    "Redes de Computadores"
+)
+combo.pack(pady=5)
+
+# Botão adicionar
+btnAdicionar = tk.Button(janela, text="Adicionar Curso",
+                         command=adicionar,
+                         bg="green",
+                         fg="white")
+btnAdicionar.pack(pady=10)
+
+# Listbox
+lista = tk.Listbox(janela, width=35, height=8)
+lista.pack()
+
+# Botão remover
+btnRemover = tk.Button(janela, text="Remover Curso",
+                       command=remover,
+                       bg="red",
+                       fg="white")
+btnRemover.pack(pady=10)
+
+janela.mainloop()
